@@ -1,0 +1,54 @@
+.card {
+  width: 100%;
+  min-width: 200px;
+  max-width: 800px;
+  overflow: hidden;
+
+  @media (min-width: 500px) {
+    &--wide {
+      display: flex;
+    }
+
+    &--wide &__content {
+      align-items: flex-start;
+    }
+
+    &--wide &__img {
+      min-width: 400px;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__heading {
+    width: 100%;
+    font-size: 1.5rem;
+  }
+
+  &__content {
+    display: flex;
+    padding: 15px;
+    flex-direction: column;
+  }
+
+  &__image {
+    position: relative;
+  }
+
+  &__length {
+    position: absolute;
+
+    right: 5px;
+    bottom: 20px;
+
+    padding: 0 5px;
+
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  &__img {
+    width: 100%;
+    min-width: 200px;
+    max-width: 100%;
+  }
+}

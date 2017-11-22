@@ -1,0 +1,24 @@
+.cardlist {
+  position: relative;
+  margin: 0 auto;
+
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -($gutter / 2);
+    margin-bottom: $gutter;
+    margin-left: -($gutter / 2);
+
+  }
+
+  &__col {
+    width: 100%;
+    padding: 10px;
+  }
+
+  @media (min-width: 500px) {
+    &__col {
+      width: 50%;
+    }
+  }
+}

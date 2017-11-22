@@ -1,4 +1,4 @@
-Lokaverkefni í **Vefforritun (TÖL107G)** í Háskóla Íslands
+Stórt-Verkefni 2 í **Vefforritun (TÖL107G)** hjá Háskóla Íslands
 
 ***
 

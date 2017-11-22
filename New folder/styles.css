@@ -1,0 +1,122 @@
+html {
+  /* stylelint-disable-line */
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  /* stylelint-disable-line */
+  box-sizing: inherit;
+  padding: 0;
+  margin: 0; }
+
+html {
+  /* stylelint-disable-line */
+  font-family: helvetica, arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5; }
+
+main {
+  /* stylelint-disable-line */
+  max-width: 1200px;
+  padding: 20px;
+  margin: 0 auto; }
+
+html {
+  background-color: #333; }
+
+h1 {
+  /* stylelint-disable-line */
+  text-align: left;
+  font-size: auto;
+  padding-bottom: 10px; }
+
+h1, h2, p {
+  color: #fff; }
+
+h2 {
+  height: auto; }
+
+img {
+  width: 100%; }
+
+.myndbond {
+  display: block; }
+
+.kafli {
+  padding-top: 30px;
+  border-top: 1px solid #fff;
+  margin-top: 20px; }
+
+.container {
+  position: relative;
+  text-align: center;
+  color: white; }
+
+.timinn {
+  position: absolute;
+  left: 80%;
+  bottom: 35%;
+  background-color: #333; }
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -10px;
+  margin-bottom: 20px;
+  margin-left: -10px; }
+
+.col {
+  padding-right: 10px;
+  padding-left: 10px;
+  display: inline-block; }
+  .col-12 {
+    width: 100%; }
+  @media (min-width: 600px) {
+    .col-m-12 {
+      width: 100%; }
+    .col-m-6 {
+      width: 50%; } }
+  @media (min-width: 800px) {
+    .col-l-12 {
+      width: 100%; }
+    .col-l-4 {
+      width: 33.33333%; } }
+
+.video {
+  width: 100%;
+  display: block;
+  margin-bottom: 10px; }
+  .video__option {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    height: max-content; }
+  .video__sign {
+    width: 5em;
+    height: 5em;
+    padding: 10px 10px 10px 10px; }
+    .video__sign__border {
+      border: 2px solid #888888; }
+  .video__tilbaka {
+    color: white; }
+  .video__href {
+    text-decoration: none; }
+  .video__overlay {
+    position: relative;
+    pointer-events: none; }
+    .video__overlay__play {
+      pointer-events: all;
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin-left: auto;
+      margin-right: auto;
+      top: calc(50% - 2.5em); }
+  .video__overlay:before {
+    content: '';
+    position: absolute;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0; }

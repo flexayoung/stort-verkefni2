@@ -1,3 +1,4 @@
+@import "scss/player";
 
 html { /* stylelint-disable-line */
   box-sizing: border-box;
@@ -26,9 +27,4 @@ main { /* stylelint-disable-line */
 }
 
 h1 { /* stylelint-disable-line */
-  text-align: center;
-}
-
-//@import "scss/form";
-//@import "scss/countdown";
-//@import "scss/button";
+  text-align: center; }

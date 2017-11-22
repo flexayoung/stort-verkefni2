@@ -5,23 +5,44 @@
   <meta charset="utf-8">
   <title>Stórt Verkefni 2</title>
   <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato|Merriweather" rel="stylesheet">
 </head>
 
 <body>
-  <h1>Myndbandaleigan</h1>
   <main>
-    <div class="container">
-      <h1 class="container__category">Nýleg Myndbönd</h1>
-      <div class="card">
-        <div class="card__image">
-          <img src="/videos/bunny.png" />
-          <div class="card__length" />
+    <h1>Myndbandaleigan</h1>
+    <section>
+      <h1>Nýleg Myndbönd</h1>
+      <div class="cardlist">
+        <div class="cardlist__row">
+          <div class="cardlist__col">
+            <div class="card">
+              <div class="card__image">
+                <img src="/videos/bunny.png" alt="bunny" class="card__img">
+                <span class="card__length">30:20</span>
+              </div>
+              <div class="card__content">
+                <h3 class="card__heading">Lego!</h3>
+                <p class="card__text">Fyrir 1 degi síðan</p>
+              </div>
+            </div>
+          </div>
+          <div class="cardlist__col">
+            <div class="card">
+              <div class="card__image">
+                <img class="card__img" src="/videos/bunny.png" alt="bunny">
+                <span class="card__length">30:20</span>
+              </div>
+              <div class="card__content">
+                <h3 class="card__heading">Lego!</h3>
+                <p class="card__text">Fyrir 1 degi síðan</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="card__title">Lego!</div>
-        <div class="card__created">Fyrir 1 degi síðan</div>
-     </div>
-  </div>
-</main>
+      </div>
+    </section>
+  </main>
 
   <script src="script-compiled.js"></script>
 </body>

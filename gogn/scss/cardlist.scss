@@ -1,7 +1,6 @@
 .cardlist {
-  max-width: 72rem;
+  position: relative;
   margin: 0 auto;
-  border-bottom: 1px solid #eee;
 
   &__row {
     display: flex;
@@ -9,6 +8,7 @@
     margin-right: -($gutter / 2);
     margin-bottom: $gutter;
     margin-left: -($gutter / 2);
+
   }
 
   &__col {

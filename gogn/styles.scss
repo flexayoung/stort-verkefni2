@@ -16,7 +16,7 @@ html { /* stylelint-disable-line */
 html { /* stylelint-disable-line */
   margin: 0 $gutter;
 
-  font-family: Lato, helvetica, arial, sans-serif;
+  font-family: helvetica, arial, sans-serif;
   font-size: 16px;
 
   line-height: 1.5;
@@ -39,9 +39,10 @@ main { /* stylelint-disable-line */
 }
 
 h1 { /* stylelint-disable-line */
-  padding: 10px;
+  font-size: 2em;
 }
 
 @import "scss/player";
 @import "scss/cardlist";
 @import "scss/card";
+@import "scss/section";

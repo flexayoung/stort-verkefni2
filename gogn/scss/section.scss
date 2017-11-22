@@ -1,0 +1,13 @@
+.section {
+  position: relative;
+  padding: 50px 0;
+
+  &__border {
+    position: absolute;
+    right: 10%;
+    bottom: 0;
+    left: 10%;
+
+    border-bottom: 1px solid #eee;
+  }
+}

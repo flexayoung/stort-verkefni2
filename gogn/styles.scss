@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 $max-width: 1200px;
 $gutter: 20px;
+=======
+@import "scss/player";
+>>>>>>> 6827572b5204a2a104c60c904c4cf20f9f05eb0a
 
 html { /* stylelint-disable-line */
   box-sizing: border-box;
@@ -32,6 +36,7 @@ img { /* stylelint-disable-line */
   max-width: 100%;
 }
 
+<<<<<<< HEAD
 main { /* stylelint-disable-line */
   max-width: $max-width;
   margin: 0 auto;
@@ -40,3 +45,7 @@ main { /* stylelint-disable-line */
 @import "scss/player";
 @import "scss/cardlist";
 @import "scss/card";
+=======
+h1 { /* stylelint-disable-line */
+  text-align: center; }
+>>>>>>> 6827572b5204a2a104c60c904c4cf20f9f05eb0a

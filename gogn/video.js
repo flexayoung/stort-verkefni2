@@ -1,5 +1,10 @@
 const video = document.querySelector('.video');
+const fullscreenBtn = document.querySelector('#fullscreen');
 const muteBtn = document.querySelector('#mute');
+const backwardsBtn = document.querySelector('#back');
+const playPauseBtn = document.querySelector('#play-pause');
+const forwardsBtn = document.querySelector('#forward');
+
 
 function playPause() {
   const icon = document.querySelector('#play-pause');
@@ -45,4 +50,24 @@ function fullscreen() {
     video.msRequestFullscreen();
   }
 }
-muteBtn.addEventListener('click', fullscreen(), false);
+
+fullscreenBtn.addEventListener('click', fullscreen);
+muteBtn.addEventListener('click', muteUnmute);
+forwardsBtn.addEventListener('click', forwards);
+backwardsBtn.addEventListener('click', backwards);
+playPauseBtn.addEventListener('click', playPause);
+
+// on Load
+
+window.onload = function setUp() {
+  const http = new XMLHttpRequest();
+
+  http.onreadystatechange = function check() {
+    if (http.readyState === 4 && http.status === 200) {
+      console.log(JSON.parse(http.response));
+    }
+  };
+  http.open('GET', 'videos.json', true);
+  http.send();
+  console.log(http);
+};

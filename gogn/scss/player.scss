@@ -1,0 +1,42 @@
+.video_container {
+  width:100%;
+  margin-bottom: 1em;
+  display: flex;
+  flex-direction: column;
+  margin-top: 2em;
+}
+
+.video_nav {
+  width:100%;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  height: max-content;
+}
+
+.nav_button {
+  width:4em;
+  height:4em;
+  padding: 10px;
+  pointer-events: all;
+  &:hover {
+    cursor: pointer;}
+  }
+
+.overlay {
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    z-index: 1;
+    visibility: visible;
+  }
+.til_baka {
+  text-align: center;
+  margin-top: 1em;
+& a {
+  text-decoration: none;
+  color:white;
+  font-size: 1.5em;
+  font-weight: bold;
+  }
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang='en'>
+   <head>
+      <meta charset='utf-8' />
+      <title>Media Player </title>
+      <link href='styles.css' rel='stylesheet' />
+      <link href='grid.css' rel='stylesheet' />
+
+   </head>
+   <body>
+
+     <main>
+  <div class="grid">
+    <h1>heading</h1>
+
+       <div class="video_container">
+
+         <img class="overlay nav_button" src="img/play.svg" alt="" onclick="playPause();">
+         <video class="video" src="videos/bunny.mp4">
+         </video>
+        </div>
+
+       <div class="video_nav">
+         <img class="nav_button" id="back" src="img/back.svg" onclick="backwards();" >
+         <img class="nav_button" id="play-pause" src="img/play.svg" onclick="playPause();">
+         <img class="nav_button" id="mute" src="img/mute.svg" onclick="muteUnmute();">
+         <img class="nav_button" id="fullscreen" src="img/fullscreen.svg" onclick="fullscreen();">
+         <img class="nav_button" id="forward" src="img/next.svg" onclick="forwards();">
+       </div>
+
+       <div class="til_baka"> <a href="index.html"> Til baka </a>
+       </div>
+     </div>
+
+    </main>
+    <script src='script-compiled.js'></script>
+    <script src='video.js'></script>
+
+   </body>
+</html>

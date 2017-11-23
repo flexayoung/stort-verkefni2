@@ -40,9 +40,10 @@ main { /* stylelint-disable-line */
 
 h1 { /* stylelint-disable-line */
   font-size: 2em;
+  margin-top: 20px;
 }
 
 @import "scss/player";
-@import "scss/cardlist";
+@import "scss/categories";
 @import "scss/card";
 @import "scss/section";

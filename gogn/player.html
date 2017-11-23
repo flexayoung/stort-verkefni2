@@ -15,14 +15,14 @@
 
        <div class="video_container">
 
-         <img class="overlay nav_button" src="img/play.svg" alt="">
+         <img class="overlay nav_button" src="img/play.svg" alt="" onclick="playPause();">
          <video class="video" src="videos/bunny.mp4">
          </video>
         </div>
 
        <div class="video_nav">
-         <img class="nav_button" id="back" src="img/back.svg">
-         <img class="nav_button" id="play-pause" src="img/play.svg">
+         <img class="nav_button" id="back" src="img/back.svg" >
+         <img class="nav_button" id="play-pause" src="img/play.svg" onclick="playPause();">
          <img class="nav_button" id="mute" src="img/mute.svg">
          <img class="nav_button" id="fullscreen" src="img/fullscreen.svg">
          <img class="nav_button" id="forward" src="img/next.svg">
@@ -34,6 +34,7 @@
 
     </main>
     <script src='script-compiled.js'></script>
+    <script src='video.js'></script>
 
    </body>
 </html>

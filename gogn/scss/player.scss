@@ -25,9 +25,10 @@
 
 .overlay {
     position: absolute;
-    left: 52%;
+    left: 50%;
     top: 45%;
     z-index: 1;
+    visibility: visible;
   }
 .til_baka {
   text-align: center;

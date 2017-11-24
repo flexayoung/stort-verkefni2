@@ -20,6 +20,7 @@ var VideoLoader = function () {
       http.onreadystatechange = function () {
         if (http.readyState == 4 && http.status == 200) {
           this.storeData(http.response);
+          this.constructData();
         }
       }.bind(this);
 
@@ -32,6 +33,91 @@ var VideoLoader = function () {
       var dataObject = JSON.parse(data);
       this.categories = dataObject.categories;
       this.videos = dataObject.videos;
+    }
+  }, {
+    key: "constructData",
+    value: function constructData() {
+      for (var i = 0; i < this.categories.length; i++) {
+        var category = document.createElement("div");
+        category.className = "category";
+
+        var h1 = document.createElement("H1");
+        var textNode = document.createTextNode(this.categories[i].title);
+
+        h1.appendChild(textNode);
+        category.appendChild(h1);
+
+        var videoContainer = document.createElement("div");
+        videoContainer.className = "videolist";
+
+        var row = document.createElement("div");
+        row.className = "videolist__row";
+
+        for (var k = 0; k < this.categories[i].videos.length; k++) {
+          var video = this.categories[i].videos[k];
+
+          var col = document.createElement("div");
+          col.className = "videolist__col";
+
+          var card = document.createElement("div");
+          card.className = "card";
+
+          var imageContainer = document.createElement("div");
+          imageContainer.className = "card__image";
+
+          var image = document.createElement("IMG");
+          image.className = "card__img";
+          image.src = this.getPosterFromId(video);
+
+          imageContainer.appendChild(image);
+          card.appendChild(imageContainer);
+
+          console.log(card);
+
+          var content = document.createElement("div");
+          content.className = "card__content";
+
+          var h3 = document.createElement("H3");
+          var _textNode = document.createTextNode(this.getTitleFromId(video));
+
+          h3.appendChild(_textNode);
+          content.appendChild(h3);
+
+          var p = document.createElement("p");
+          p.innerHTML = "Fyrir 1 degi síðan";
+
+          content.appendChild(p);
+          card.appendChild(content);
+          col.append(card);
+
+          row.append(col);
+        }
+        videoContainer.appendChild(row);
+        category.appendChild(videoContainer);
+
+        var border = document.createElement("div");
+        border.className = "category__border";
+
+        category.appendChild(border);
+
+        this.container.appendChild(category);
+      }
+    }
+  }, {
+    key: "getTitleFromId",
+    value: function getTitleFromId(videoId) {
+      var id = videoId;
+      for (var i = 0; i < this.videos.length; i++) {
+        if (this.videos[i].id == id) return this.videos[i].title;
+      }
+    }
+  }, {
+    key: "getPosterFromId",
+    value: function getPosterFromId(videoId) {
+      var id = videoId;
+      for (var i = 0; i < this.videos.length; i++) {
+        if (this.videos[i].id == id) return this.videos[i].poster;
+      }
     }
   }]);
 

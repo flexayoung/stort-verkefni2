@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -13,78 +13,82 @@ var VideoLoader = function () {
   }
 
   _createClass(VideoLoader, [{
-    key: "load",
+    key: 'load',
     value: function load() {
       var http = new XMLHttpRequest();
 
       http.onreadystatechange = function () {
-        if (http.readyState == 4 && http.status == 200) {
+        if (http.readyState === 4 && http.status === 200) {
           this.storeData(http.response);
           this.constructData();
         }
       }.bind(this);
 
-      http.open("GET", "videos.json", true);
+      http.open('GET', 'videos.json', true);
       http.send();
     }
   }, {
-    key: "storeData",
+    key: 'storeData',
     value: function storeData(data) {
       var dataObject = JSON.parse(data);
       this.categories = dataObject.categories;
       this.videos = dataObject.videos;
     }
   }, {
-    key: "constructData",
+    key: 'constructData',
     value: function constructData() {
-      for (var i = 0; i < this.categories.length; i++) {
-        var category = document.createElement("div");
-        category.className = "category";
+      for (var i = 0; i < this.categories.length; i += 1) {
+        var category = document.createElement('div');
+        category.className = 'category';
 
-        var h1 = document.createElement("H1");
+        var h1 = document.createElement('H1');
         var textNode = document.createTextNode(this.categories[i].title);
 
         h1.appendChild(textNode);
         category.appendChild(h1);
 
-        var videoContainer = document.createElement("div");
-        videoContainer.className = "videolist";
+        var videoContainer = document.createElement('div');
+        videoContainer.className = 'videolist';
 
-        var row = document.createElement("div");
-        row.className = "videolist__row";
+        var row = document.createElement('div');
+        row.className = 'videolist__row';
 
-        for (var k = 0; k < this.categories[i].videos.length; k++) {
-          var video = this.categories[i].videos[k];
+        for (var k = 0; k < this.categories[i].videos.length; k += 1) {
+          var video = this.getVideoFromId(this.categories[i].videos[k]);
 
-          var col = document.createElement("div");
-          col.className = "videolist__col";
+          var col = document.createElement('div');
+          col.className = 'videolist__col';
 
-          var card = document.createElement("div");
-          card.className = "card";
+          var card = document.createElement('div');
+          card.className = 'card';
 
-          var imageContainer = document.createElement("div");
-          imageContainer.className = "card__image";
+          var imageContainer = document.createElement('div');
+          imageContainer.className = 'card__image';
 
-          var image = document.createElement("IMG");
-          image.className = "card__img";
-          image.src = this.getPosterFromId(video);
+          var image = document.createElement('IMG');
+          image.className = 'card__img';
+          image.src = video.poster;
+
+          var length = document.createElement('span');
+          length.className = 'card__length';
+          length.innerHTML = this.getLengthString(video.duration);
 
           imageContainer.appendChild(image);
+          imageContainer.appendChild(length);
           card.appendChild(imageContainer);
 
-          console.log(card);
+          var content = document.createElement('div');
+          content.className = 'card__content';
 
-          var content = document.createElement("div");
-          content.className = "card__content";
+          var h3 = document.createElement('H3');
+          textNode = document.createTextNode(video.title);
+          h3.className = 'card__heading';
 
-          var h3 = document.createElement("H3");
-          var _textNode = document.createTextNode(this.getTitleFromId(video));
-
-          h3.appendChild(_textNode);
+          h3.appendChild(textNode);
           content.appendChild(h3);
 
-          var p = document.createElement("p");
-          p.innerHTML = "Fyrir 1 degi síðan";
+          var p = document.createElement('p');
+          p.innerHTML = this.getAgeOfVideo(video.created);
 
           content.appendChild(p);
           card.appendChild(content);
@@ -95,8 +99,8 @@ var VideoLoader = function () {
         videoContainer.appendChild(row);
         category.appendChild(videoContainer);
 
-        var border = document.createElement("div");
-        border.className = "category__border";
+        var border = document.createElement('div');
+        border.className = 'category__border';
 
         category.appendChild(border);
 
@@ -104,20 +108,28 @@ var VideoLoader = function () {
       }
     }
   }, {
-    key: "getTitleFromId",
-    value: function getTitleFromId(videoId) {
+    key: 'getVideoFromId',
+    value: function getVideoFromId(videoId) {
       var id = videoId;
-      for (var i = 0; i < this.videos.length; i++) {
-        if (this.videos[i].id == id) return this.videos[i].title;
+      for (var i = 0; i < this.videos.length; i += 1) {
+        if (this.videos[i].id === id) return this.videos[i];
       }
+      return null;
     }
   }, {
-    key: "getPosterFromId",
-    value: function getPosterFromId(videoId) {
-      var id = videoId;
-      for (var i = 0; i < this.videos.length; i++) {
-        if (this.videos[i].id == id) return this.videos[i].poster;
-      }
+    key: 'getLengthString',
+    value: function getLengthString(time) {
+      var minutes = Math.floor(time / 60);
+      var seconds = Math.floor(time % 60);
+      if (seconds < 10) seconds = '0' + seconds;
+      return minutes + ':' + seconds;
+    }
+  }, {
+    key: 'getAgeOfVideo',
+    value: function getAgeOfVideo(dateCreated) {
+      var age = new Date();
+      age.setMilliseconds(dateCreated);
+      console.log(age);
     }
   }]);
 

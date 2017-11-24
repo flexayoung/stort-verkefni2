@@ -5,77 +5,80 @@ class VideoLoader {
   }
 
   load() {
-    let http = new XMLHttpRequest();
+    const http = new XMLHttpRequest();
 
-    http.onreadystatechange = function() {
-      if (http.readyState == 4 && http.status == 200) {
+    http.onreadystatechange = function () {
+      if (http.readyState === 4 && http.status === 200) {
         this.storeData(http.response);
         this.constructData();
-
       }
     }.bind(this);
 
-    http.open("GET", "videos.json", true);
+    http.open('GET', 'videos.json', true);
     http.send();
   }
 
 
   storeData(data) {
-    let dataObject = JSON.parse(data);
+    const dataObject = JSON.parse(data);
     this.categories = dataObject.categories;
     this.videos = dataObject.videos;
   }
 
   constructData() {
-    for (var i = 0; i < this.categories.length; i++) {
-      let category = document.createElement("div");
-      category.className = "category"
+    for (let i = 0; i < this.categories.length; i += 1) {
+      const category = document.createElement('div');
+      category.className = 'category';
 
-      let h1 = document.createElement("H1");
+      const h1 = document.createElement('H1');
       let textNode = document.createTextNode(this.categories[i].title);
 
-      h1.appendChild(textNode)
+      h1.appendChild(textNode);
       category.appendChild(h1);
 
-      let videoContainer = document.createElement("div");
-      videoContainer.className = "videolist";
+      const videoContainer = document.createElement('div');
+      videoContainer.className = 'videolist';
 
-      let row = document.createElement("div");
-      row.className = "videolist__row";
+      const row = document.createElement('div');
+      row.className = 'videolist__row';
 
 
-      for (var k = 0; k < this.categories[i].videos.length; k++) {
-        let video = this.categories[i].videos[k];
+      for (let k = 0; k < this.categories[i].videos.length; k += 1) {
+        const video = this.getVideoFromId(this.categories[i].videos[k]);
 
-        let col = document.createElement("div");
-        col.className = "videolist__col";
+        const col = document.createElement('div');
+        col.className = 'videolist__col';
 
-        let card = document.createElement("div");
-        card.className = "card";
+        const card = document.createElement('div');
+        card.className = 'card';
 
-        let imageContainer = document.createElement("div");
-        imageContainer.className = "card__image";
+        const imageContainer = document.createElement('div');
+        imageContainer.className = 'card__image';
 
-        let image = document.createElement("IMG");
-        image.className = "card__img";
-        image.src = this.getPosterFromId(video);
+        const image = document.createElement('IMG');
+        image.className = 'card__img';
+        image.src = video.poster;
+
+        const length = document.createElement('span');
+        length.className = 'card__length';
+        length.innerHTML = this.getLengthString(video.duration);
 
         imageContainer.appendChild(image);
+        imageContainer.appendChild(length);
         card.appendChild(imageContainer);
 
-        console.log(card);
+        const content = document.createElement('div');
+        content.className = 'card__content';
 
-        let content = document.createElement("div");
-        content.className = "card__content";
+        const h3 = document.createElement('H3');
+        textNode = document.createTextNode(video.title);
+        h3.className = 'card__heading';
 
-        let h3 = document.createElement("H3");
-        let textNode = document.createTextNode(this.getTitleFromId(video));
-
-        h3.appendChild(textNode)
+        h3.appendChild(textNode);
         content.appendChild(h3);
 
-        let p = document.createElement("p");
-        p.innerHTML = "Fyrir 1 degi síðan";
+        const p = document.createElement('p');
+        p.innerHTML = this.getAgeOfVideo(video.created);
 
         content.appendChild(p);
         card.appendChild(content);
@@ -83,34 +86,38 @@ class VideoLoader {
 
         row.append(col);
       }
-      videoContainer.appendChild(row)
+      videoContainer.appendChild(row);
       category.appendChild(videoContainer);
 
-      let border = document.createElement("div");
-      border.className = "category__border";
+      const border = document.createElement('div');
+      border.className = 'category__border';
 
       category.appendChild(border);
 
       this.container.appendChild(category);
-
-    }
-
-  }
-
-  getTitleFromId(videoId) {
-    let id = videoId;
-    for(var i = 0; i < this.videos.length; i ++) {
-      if(this.videos[i].id == id) return this.videos[i].title;
     }
   }
 
-  getPosterFromId(videoId) {
-    let id = videoId;
-    for(var i = 0; i < this.videos.length; i ++) {
-      if(this.videos[i].id == id) return this.videos[i].poster;
+  getVideoFromId(videoId) {
+    const id = videoId;
+    for (let i = 0; i < this.videos.length; i += 1) {
+      if (this.videos[i].id === id) return this.videos[i];
     }
+    return null;
   }
 
+  getLengthString(time) {
+    const minutes = Math.floor(time / 60);
+    let seconds = Math.floor(time % 60);
+    if (seconds < 10) seconds = `0${seconds}`;
+    return(`${minutes}:${seconds}`);
+  }
+
+  getAgeOfVideo(dateCreated) {
+    const age = new Date();
+    age.setMilliseconds(dateCreated);
+    console.log(age);
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {

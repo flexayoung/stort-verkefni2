@@ -1,4 +1,6 @@
 const video = document.querySelector('.video');
+const title = document.querySelector('h1');
+
 const fullscreenBtn = document.querySelector('#fullscreen');
 const muteBtn = document.querySelector('#mute');
 const backwardsBtn = document.querySelector('#back');
@@ -60,7 +62,29 @@ playPauseBtn.addEventListener('click', playPause);
 
 // on Load
 function gettingData(e) {
-  console.log(e.videos[0].title);
+  const id = getQueryVariable("id");
+  const vid = searchForMatchingId(e, id);
+  video.src = vid.video;
+  title.innerHTML = vid.title;
+
+}
+
+function getQueryVariable(variable) {
+  var query = window.location.search.substring(1);
+  var vars = query.split("&");
+  for (var i = 0; i < vars.length; i++) {
+    var pair = vars[i].split("=");
+    if (pair[0] == variable) {
+      return pair[1];
+    }
+  }
+  return (false);
+}
+
+function searchForMatchingId(data, id) {
+  for (var i = 0; i < data.videos.length; i += 1) {
+    if (data.videos[i].id == id) return data.videos[i];
+  }
 }
 
 window.onload = function setUp() {

@@ -144,7 +144,7 @@ class VideoLoader {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log(window.location.pathname)
+  //console.log(window.location.pathname)
  if(window.location.pathname == '/') {
     const videoLoader = new VideoLoader(document.querySelector('#index'));
   }

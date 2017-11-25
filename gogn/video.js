@@ -6,6 +6,7 @@ const playPauseBtn = document.querySelector('#play-pause');
 const forwardsBtn = document.querySelector('#forward');
 
 
+
 function playPause() {
   const icon = document.querySelector('#play-pause');
   const overlayIcon = document.querySelector('.overlay');
@@ -58,13 +59,18 @@ backwardsBtn.addEventListener('click', backwards);
 playPauseBtn.addEventListener('click', playPause);
 
 // on Load
+function gettingData(e) {
+  console.log(e.videos[0].title);
+}
 
 window.onload = function setUp() {
   const http = new XMLHttpRequest();
+  var data;
 
   http.onreadystatechange = function check() {
     if (http.readyState === 4 && http.status === 200) {
-      console.log(JSON.parse(http.response));
+      data = (JSON.parse(http.response));
+      gettingData(data);
     }
   };
   http.open('GET', 'videos.json', true);

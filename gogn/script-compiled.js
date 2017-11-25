@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 "use strict";
+=======
+'use strict';
+>>>>>>> a6013190cd3c5c694a0a16b3741b86714740ae3f
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -13,25 +17,123 @@ var VideoLoader = function () {
   }
 
   _createClass(VideoLoader, [{
-    key: "load",
+    key: 'load',
     value: function load() {
       var http = new XMLHttpRequest();
 
       http.onreadystatechange = function () {
-        if (http.readyState == 4 && http.status == 200) {
+        if (http.readyState === 4 && http.status === 200) {
           this.storeData(http.response);
+          this.constructData();
         }
       }.bind(this);
 
-      http.open("GET", "videos.json", true);
+      http.open('GET', 'videos.json', true);
       http.send();
     }
   }, {
-    key: "storeData",
+    key: 'storeData',
     value: function storeData(data) {
       var dataObject = JSON.parse(data);
       this.categories = dataObject.categories;
       this.videos = dataObject.videos;
+    }
+  }, {
+    key: 'constructData',
+    value: function constructData() {
+      for (var i = 0; i < this.categories.length; i += 1) {
+        var category = document.createElement('div');
+        category.className = 'category';
+
+        var h1 = document.createElement('H1');
+        var textNode = document.createTextNode(this.categories[i].title);
+
+        h1.appendChild(textNode);
+        category.appendChild(h1);
+
+        var videoContainer = document.createElement('div');
+        videoContainer.className = 'videolist';
+
+        var row = document.createElement('div');
+        row.className = 'videolist__row';
+
+        for (var k = 0; k < this.categories[i].videos.length; k += 1) {
+          var video = this.getVideoFromId(this.categories[i].videos[k]);
+
+          var col = document.createElement('div');
+          col.className = 'videolist__col';
+
+          var card = document.createElement('div');
+          card.className = 'card';
+
+          var imageContainer = document.createElement('div');
+          imageContainer.className = 'card__image';
+
+          var image = document.createElement('IMG');
+          image.className = 'card__img';
+          image.src = video.poster;
+
+          var length = document.createElement('span');
+          length.className = 'card__length';
+          length.innerHTML = this.getLengthString(video.duration);
+
+          imageContainer.appendChild(image);
+          imageContainer.appendChild(length);
+          card.appendChild(imageContainer);
+
+          var content = document.createElement('div');
+          content.className = 'card__content';
+
+          var h3 = document.createElement('H3');
+          textNode = document.createTextNode(video.title);
+          h3.className = 'card__heading';
+
+          h3.appendChild(textNode);
+          content.appendChild(h3);
+
+          var p = document.createElement('p');
+          p.innerHTML = this.getAgeOfVideo(video.created);
+
+          content.appendChild(p);
+          card.appendChild(content);
+          col.append(card);
+
+          row.append(col);
+        }
+        videoContainer.appendChild(row);
+        category.appendChild(videoContainer);
+
+        var border = document.createElement('div');
+        border.className = 'category__border';
+
+        category.appendChild(border);
+
+        this.container.appendChild(category);
+      }
+    }
+  }, {
+    key: 'getVideoFromId',
+    value: function getVideoFromId(videoId) {
+      var id = videoId;
+      for (var i = 0; i < this.videos.length; i += 1) {
+        if (this.videos[i].id === id) return this.videos[i];
+      }
+      return null;
+    }
+  }, {
+    key: 'getLengthString',
+    value: function getLengthString(time) {
+      var minutes = Math.floor(time / 60);
+      var seconds = Math.floor(time % 60);
+      if (seconds < 10) seconds = '0' + seconds;
+      return minutes + ':' + seconds;
+    }
+  }, {
+    key: 'getAgeOfVideo',
+    value: function getAgeOfVideo(dateCreated) {
+      var age = new Date();
+      age.setMilliseconds(dateCreated);
+      console.log(age);
     }
   }]);
 

@@ -159,7 +159,7 @@ var VideoLoader = function () {
 }();
 
 document.addEventListener('DOMContentLoaded', function () {
-  var videoLoader = new VideoLoader(document.querySelector('main'));
+  var videoLoader = new VideoLoader(document.querySelector('#index'));
 });
 
 //# sourceMappingURL=script-compiled.js.map

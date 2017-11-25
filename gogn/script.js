@@ -143,5 +143,5 @@ class VideoLoader {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const videoLoader = new VideoLoader(document.querySelector('main'));
+  const videoLoader = new VideoLoader(document.querySelector('#index'));
 });

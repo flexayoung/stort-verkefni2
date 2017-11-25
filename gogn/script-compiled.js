@@ -59,8 +59,9 @@ var VideoLoader = function () {
           var col = document.createElement('div');
           col.className = 'videolist__col';
 
-          var card = document.createElement('div');
+          var card = document.createElement('a');
           card.className = 'card';
+          card.href = '/player.html?id=' + video.id;
 
           var imageContainer = document.createElement('div');
           imageContainer.className = 'card__image';
@@ -159,7 +160,10 @@ var VideoLoader = function () {
 }();
 
 document.addEventListener('DOMContentLoaded', function () {
-  var videoLoader = new VideoLoader(document.querySelector('#index'));
+  console.log(window.location.pathname);
+  if (window.location.pathname == '/') {
+    var videoLoader = new VideoLoader(document.querySelector('#index'));
+  }
 });
 
 //# sourceMappingURL=script-compiled.js.map

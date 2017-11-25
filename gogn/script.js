@@ -49,8 +49,9 @@ class VideoLoader {
         const col = document.createElement('div');
         col.className = 'videolist__col';
 
-        const card = document.createElement('div');
+        const card = document.createElement('a');
         card.className = 'card';
+        card.href = `/player.html?id=${video.id}`
 
         const imageContainer = document.createElement('div');
         imageContainer.className = 'card__image';
@@ -143,5 +144,8 @@ class VideoLoader {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const videoLoader = new VideoLoader(document.querySelector('#index'));
+  console.log(window.location.pathname)
+ if(window.location.pathname == '/') {
+    const videoLoader = new VideoLoader(document.querySelector('#index'));
+  }
 });

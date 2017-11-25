@@ -127,9 +127,31 @@ var VideoLoader = function () {
   }, {
     key: 'getAgeOfVideo',
     value: function getAgeOfVideo(dateCreated) {
-      var age = new Date();
-      age.setMilliseconds(dateCreated);
-      console.log(age);
+      var age = new Date(dateCreated);
+      var now = new Date();
+      var diff = now - age;
+      var days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+      var hours = Math.ceil(diff / (1000 * 60) % 60);
+
+      if (days > 365) {
+        var year = Math.floor(days / 365);
+        if (year === 1) return 'Fyrir ' + year + ' \xE1ri s\xED\xF0an';
+        return 'Fyrir ' + year + ' \xE1rum s\xED\xF0an';
+      } else if (days > 30) {
+        var month = Math.floor(days / 30);
+        if (month === 1) return 'Fyrir ' + month + ' m\xE1nu\xF0i s\xED\xF0an';
+        return 'Fyrir ' + month + ' m\xE1nu\xF0um s\xED\xF0an';
+      } else if (days > 7) {
+        var week = Math.floor(days / 7);
+        if (week === 1) return 'Fyrir ' + week + ' viku s\xED\xF0an';
+        return 'Fyrir ' + week + ' vikum s\xED\xF0an';
+      } else if (hours > 24) {
+        if (days === 1) return 'Fyrir ' + days + ' degi s\xED\xF0an';
+        return 'Fyrir ' + days + ' d\xF6gum s\xED\xF0an';
+      }
+
+      if (hours === 1) return 'Fyrir ' + hours + ' klukkut\xEDma s\xED\xF0an';
+      return 'Fyrir ' + hours + ' klukkut\xEDmum s\xED\xF0an';
     }
   }]);
 

@@ -110,13 +110,35 @@ class VideoLoader {
     const minutes = Math.floor(time / 60);
     let seconds = Math.floor(time % 60);
     if (seconds < 10) seconds = `0${seconds}`;
-    return(`${minutes}:${seconds}`);
+    return (`${minutes}:${seconds}`);
   }
 
   getAgeOfVideo(dateCreated) {
-    const age = new Date();
-    age.setMilliseconds(dateCreated);
-    console.log(age);
+    const age = new Date(dateCreated);
+    const now = new Date();
+    const diff = now - age;
+    const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.ceil(((diff / (1000 * 60)) % 60));
+
+    if (days > 365) {
+      const year = Math.floor(days / 365);
+      if (year === 1) return `Fyrir ${year} ári síðan`;
+      return `Fyrir ${year} árum síðan`;
+    } else if (days > 30) {
+      const month = Math.floor(days / 30);
+      if (month === 1) return `Fyrir ${month} mánuði síðan`;
+      return `Fyrir ${month} mánuðum síðan`;
+    } else if (days > 7) {
+      const week = Math.floor(days / 7);
+      if (week === 1) return `Fyrir ${week} viku síðan`;
+      return `Fyrir ${week} vikum síðan`;
+    } else if (hours > 24) {
+      if (days === 1) return `Fyrir ${days} degi síðan`;
+      return `Fyrir ${days} dögum síðan`;
+    }
+
+    if (hours === 1) return `Fyrir ${hours} klukkutíma síðan`;
+    return `Fyrir ${hours} klukkutímum síðan`;
   }
 }
 

@@ -160,8 +160,7 @@ var VideoLoader = function () {
 }();
 
 document.addEventListener('DOMContentLoaded', function () {
-  //console.log(window.location.pathname)
-  if (window.location.pathname == '/') {
+  if (window.location.pathname === '/') {
     var videoLoader = new VideoLoader(document.querySelector('#index'));
   }
 });

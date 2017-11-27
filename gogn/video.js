@@ -27,7 +27,7 @@ function playPause() {
     overlayIcon.setAttribute('style', 'visibility: visible;');
   }
   removeBorder();
-  this.classList.add('button_border');
+  icon.classList.add('button_border');
 }
 
 function backwards() {
@@ -73,20 +73,21 @@ forwardsBtn.addEventListener('click', forwards);
 backwardsBtn.addEventListener('click', backwards);
 playPauseBtn.addEventListener('click', playPause);
 
-
+function idNotFoundError() {
+  const content = document.querySelector('.grid');
+  const main = document.querySelector('main');
+  const errorMsg = document.createTextNode('Myndband fannst ekki...');
+  const errorContainer = document.createElement('h1');
+  content.hidden = true;
+  errorContainer.appendChild(errorMsg);
+  main.appendChild(errorContainer);
+}
 
 // on Load
 
-function gettingData(e) {
-  const id = getQueryVariable("id");
-  const vid = searchForMatchingId(e, id);
-  video.src = vid.video;
-  title.innerHTML = vid.title;
-}
-
 function getQueryVariable(variable) {
   const query = window.location.search.substring(1);
-  var vars = query.split("&");
+  const vars = query.split("&");
   for (var i = 0; i < vars.length; i++) {
     var pair = vars[i].split("=");
     if (pair[0] === variable) {
@@ -100,6 +101,16 @@ function searchForMatchingId(data, id) {
   for (let i = 0; i < data.videos.length; i += 1) {
     if (data.videos[i].id == id) return data.videos[i];
   }
+  if (data.videos.id !== id) {
+    idNotFoundError();
+  }
+}
+
+function gettingData(e) {
+  const id = getQueryVariable("id");
+  const vid = searchForMatchingId(e, id);
+  video.src = vid.video;
+  title.innerHTML = vid.title;
 }
 
 window.onload = function setUp() {

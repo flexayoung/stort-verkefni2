@@ -22,13 +22,18 @@
   width: 4em;
   height: 4em;
   padding: 10px;
-  pointer-events: all;
+}
+
+.nav_button:hover {
+  cursor:pointer;
 }
 
 .button_border {
   border: 2px solid #FFFFF0;
   border-style: groove;
 }
+
+
 
 .overlay {
   position: absolute;
@@ -43,11 +48,11 @@
 .til_baka {
   margin-top: 1em;
   text-align: center;
+}
 
-  a {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #fff;
-    text-decoration: none;
-  }
+a {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
 }

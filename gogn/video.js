@@ -1,12 +1,17 @@
 const video = document.querySelector('.video');
 const title = document.querySelector('h1');
-
 const fullscreenBtn = document.querySelector('#fullscreen');
 const muteBtn = document.querySelector('#mute');
 const backwardsBtn = document.querySelector('#back');
 const playPauseBtn = document.querySelector('#play-pause');
 const forwardsBtn = document.querySelector('#forward');
 
+function removeBorder() {
+  const navButtons = document.querySelectorAll('.nav_button');
+  navButtons.forEach((e) => {
+    e.classList.remove('button_border');
+  });
+}
 
 
 function playPause() {
@@ -21,14 +26,20 @@ function playPause() {
     icon.src = 'img/play.svg';
     overlayIcon.setAttribute('style', 'visibility: visible;');
   }
+  removeBorder();
+  this.classList.add('button_border');
 }
 
 function backwards() {
   video.currentTime -= 3;
+  removeBorder();
+  this.classList.add('button_border');
 }
 
 function forwards() {
   video.currentTime += 3;
+  removeBorder();
+  this.classList.add('button_border');
 }
 
 function muteUnmute() {
@@ -40,6 +51,8 @@ function muteUnmute() {
     video.muted = true;
     icon.src = 'img/unmute.svg';
   }
+  removeBorder();
+  this.classList.add('button_border');
 }
 
 function fullscreen() {
@@ -60,21 +73,23 @@ forwardsBtn.addEventListener('click', forwards);
 backwardsBtn.addEventListener('click', backwards);
 playPauseBtn.addEventListener('click', playPause);
 
+
+
 // on Load
+
 function gettingData(e) {
   const id = getQueryVariable("id");
   const vid = searchForMatchingId(e, id);
   video.src = vid.video;
   title.innerHTML = vid.title;
-
 }
 
 function getQueryVariable(variable) {
-  var query = window.location.search.substring(1);
+  const query = window.location.search.substring(1);
   var vars = query.split("&");
   for (var i = 0; i < vars.length; i++) {
     var pair = vars[i].split("=");
-    if (pair[0] == variable) {
+    if (pair[0] === variable) {
       return pair[1];
     }
   }
@@ -82,14 +97,14 @@ function getQueryVariable(variable) {
 }
 
 function searchForMatchingId(data, id) {
-  for (var i = 0; i < data.videos.length; i += 1) {
+  for (let i = 0; i < data.videos.length; i += 1) {
     if (data.videos[i].id == id) return data.videos[i];
   }
 }
 
 window.onload = function setUp() {
   const http = new XMLHttpRequest();
-  var data;
+  let data;
 
   http.onreadystatechange = function check() {
     if (http.readyState === 4 && http.status === 200) {

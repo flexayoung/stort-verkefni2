@@ -16,7 +16,7 @@ var VideoLoader = function () {
     value: function load() {
       var http = new XMLHttpRequest();
 
-      http.onreadystatechange = function () {
+      http.onreadystatechange = function checkState() {
         if (http.readyState === 4 && http.status === 200) {
           this.storeData(http.response);
           this.constructData();

@@ -87,9 +87,9 @@ function idNotFoundError() {
 
 function getQueryVariable(variable) {
   const query = window.location.search.substring(1);
-  const vars = query.split("&");
-  for (var i = 0; i < vars.length; i++) {
-    var pair = vars[i].split("=");
+  const vars = query.split('&');
+  for (let i = 0; i < vars.length; i += 1) {
+    const pair = vars[i].split('=');
     if (pair[0] === variable) {
       return pair[1];
     }
@@ -99,7 +99,7 @@ function getQueryVariable(variable) {
 
 function searchForMatchingId(data, id) {
   for (let i = 0; i < data.videos.length; i += 1) {
-    if (data.videos[i].id == id) return data.videos[i];
+    if (data.videos[i].id === id) return data.videos[i];
   }
   if (data.videos.id !== id) {
     idNotFoundError();
@@ -125,5 +125,4 @@ window.onload = function setUp() {
   };
   http.open('GET', 'videos.json', true);
   http.send();
-  console.log(http);
 };

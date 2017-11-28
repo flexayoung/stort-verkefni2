@@ -9,7 +9,6 @@ var VideoLoader = function () {
     _classCallCheck(this, VideoLoader);
 
     this.container = container;
-    this.load();
   }
 
   _createClass(VideoLoader, [{
@@ -162,6 +161,7 @@ var VideoLoader = function () {
 document.addEventListener('DOMContentLoaded', function () {
   if (window.location.pathname === '/') {
     var videoLoader = new VideoLoader(document.querySelector('#index'));
+    videoLoader.load();
   }
 });
 

@@ -1,11 +1,6 @@
 $max-width: 1200px;
 $gutter: 20px;
 
-
-html { /* stylelint-disable-line */
-  box-sizing: border-box;
-}
-
 *, *:before, *:after { /* stylelint-disable-line */
   box-sizing: inherit;
 
@@ -14,6 +9,8 @@ html { /* stylelint-disable-line */
 }
 
 html { /* stylelint-disable-line */
+  box-sizing: border-box;
+
   margin: 0 $gutter;
 
   font-family: helvetica, arial, sans-serif;
@@ -40,7 +37,6 @@ main { /* stylelint-disable-line */
 
 h1 { /* stylelint-disable-line */
   margin-top: 20px;
-  font-size: 2em;
 }
 
 @import "scss/player";

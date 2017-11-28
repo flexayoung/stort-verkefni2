@@ -17,4 +17,3 @@ $ npm run dev
 ```
 
 This will initiate browser sync and run the program in the browser at **localhost:3000**
-

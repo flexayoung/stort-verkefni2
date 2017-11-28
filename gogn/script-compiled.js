@@ -196,7 +196,7 @@ var VideoPlayer = function () {
     this.backwardsBtn = document.querySelector('#back');
     this.playPauseBtn = document.querySelector('#play-pause');
     this.forwardsBtn = document.querySelector('#forward');
-    this.overlay = document.querySelector('#overlay');
+    this.overlay = document.querySelector('.overlay_background');
 
     this.fullscreenBtn.addEventListener('click', this.fullscreen.bind(this));
     this.muteBtn.addEventListener('click', this.muteUnmute.bind(this));
@@ -256,7 +256,7 @@ var VideoPlayer = function () {
         this.video.muted = true;
         icon.src = 'img/unmute.svg';
       }
-      removeBorder();
+      this.removeBorder();
       this.muteBtn.classList.add('button_border');
     }
   }, {

@@ -16,14 +16,17 @@ var VideoLoader = function () {
     value: function load() {
       var http = new XMLHttpRequest();
 
-      http.onreadystatechange = function checkState() {
-        if (http.readyState === 4 && http.status === 200) {
+      http.open('GET', './videos.json', true);
+
+      http.onload = function checkState() {
+        console.log("HERE");
+
+        if (http.status >= 200 && http.status < 400) {
           this.storeData(http.response);
           this.constructData();
         }
       }.bind(this);
 
-      http.open('GET', 'videos.json', true);
       http.send();
     }
   }, {
@@ -159,10 +162,12 @@ var VideoLoader = function () {
 }();
 
 document.addEventListener('DOMContentLoaded', function () {
-  if (window.location.pathname === '/') {
-    var videoLoader = new VideoLoader(document.querySelector('#index'));
-    videoLoader.load();
-  }
+
+  //  if (window.location.pathname === '/') {
+  console.log("baba");
+  var videoLoader = new VideoLoader(document.querySelector('#index'));
+  videoLoader.load();
+  //}
 });
 
 //# sourceMappingURL=script-compiled.js.map

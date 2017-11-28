@@ -6,14 +6,18 @@ class VideoLoader {
   load() {
     const http = new XMLHttpRequest();
 
-    http.onreadystatechange = function checkState() {
-      if (http.readyState === 4 && http.status === 200) {
+    http.open('GET', './videos.json', true);
+
+    http.onload = function checkState() {
+      console.log("HERE");
+
+      if (http.status >= 200 && http.status < 400) {
         this.storeData(http.response);
         this.constructData();
       }
+
     }.bind(this);
 
-    http.open('GET', 'videos.json', true);
     http.send();
   }
 
@@ -142,9 +146,13 @@ class VideoLoader {
   }
 }
 
+
+
 document.addEventListener('DOMContentLoaded', () => {
-  if (window.location.pathname === '/') {
+
+//  if (window.location.pathname === '/') {
+    console.log("baba");
     const videoLoader = new VideoLoader(document.querySelector('#index'));
     videoLoader.load();
-  }
+  //}
 });

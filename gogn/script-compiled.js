@@ -262,14 +262,14 @@ var VideoPlayer = function () {
   }, {
     key: 'fullscreen',
     value: function fullscreen() {
-      if (video.requestFullscreen) {
-        video.requestFullscreen();
+      if (this.video.requestFullscreen) {
+        this.video.requestFullscreen();
       } else if (video.mozRequestFullScreen) {
-        video.mozRequestFullScreen();
+        this.video.mozRequestFullScreen();
       } else if (video.webkitRequestFullscreen) {
-        video.webkitRequestFullscreen();
+        this.video.webkitRequestFullscreen();
       } else if (video.msRequestFullscreen) {
-        video.msRequestFullscreen();
+        this.video.msRequestFullscreen();
       }
     }
   }, {

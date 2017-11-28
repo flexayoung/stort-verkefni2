@@ -1,37 +1,37 @@
 .video_container {
+  position: relative;
   display: flex;
   width: fit-content;
-  flex-direction: column;
-  position: relative;
-  overflow:hidden;
   margin: 0 auto;
+  overflow: hidden;
+  flex-direction: column;
 }
 
 .overlay_background {
-  position:absolute;
-  top:0;
-  right:0;
-  bottom:0;
-  left:0;
-  display:flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
   align-items: center;
+  cursor: pointer;
   background-color: rgba(0, 0, 0, 0.2);
   justify-content: center;
-  cursor: pointer;
 }
 
 .video_nav {
-  margin-top: 1em;
   display: flex;
   width: 100%;
   height: max-content;
+  margin-top: 1em;
   flex-wrap: nowrap;
   justify-content: center;
 }
 
 .video_heading {
-  text-align: center;
   margin-bottom: 1em;
+  text-align: center;
 }
 
 .nav_button {
@@ -41,26 +41,23 @@
 }
 
 .nav_button:hover {
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .button_border {
-  border: 2px solid #FFFFF0;
+  border: 2px solid #fffff0;
   border-style: groove;
 }
-
-
 
 .overlay {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
   z-index: 1;
   visibility: visible;
   background-color: rgba(0, 0, 0, 0.2);
+  transform: translate(-50%, -50%);
 }
-
 
 .til_baka {
   margin-top: 1em;
@@ -68,8 +65,8 @@
 }
 
 .til_baka a {
-   font-size: 1.5em;
-   font-weight: bold;
-   color: #fff;
-   text-decoration: none;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
 }

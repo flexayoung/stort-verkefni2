@@ -5,6 +5,7 @@ const muteBtn = document.querySelector('#mute');
 const backwardsBtn = document.querySelector('#back');
 const playPauseBtn = document.querySelector('#play-pause');
 const forwardsBtn = document.querySelector('#forward');
+const overlayBtn = document.querySelector('.overlay_background');
 
 function removeBorder() {
   const navButtons = document.querySelectorAll('.nav_button');
@@ -72,6 +73,7 @@ muteBtn.addEventListener('click', muteUnmute);
 forwardsBtn.addEventListener('click', forwards);
 backwardsBtn.addEventListener('click', backwards);
 playPauseBtn.addEventListener('click', playPause);
+overlayBtn.addEventListener('click', playPause);
 
 function idNotFoundError() {
   const content = document.querySelector('.grid');

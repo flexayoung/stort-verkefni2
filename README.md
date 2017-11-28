@@ -17,3 +17,11 @@ $ npm run dev
 ```
 
 This will initiate browser sync and run the program in the browser at **localhost:3000**
+
+## Folders
+
+/img folder contains images .svg files used for the media player buttons
+
+/scss folder contains scss files used
+
+/videos .png files for video thumbnails.

@@ -108,6 +108,7 @@ function searchForMatchingId(data, id) {
 }
 
 function gettingData(e) {
+  
   const id = parseInt(getQueryVariable('id'));
   const vid = searchForMatchingId(e, id);
   video.src = vid.video;

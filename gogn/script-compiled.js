@@ -1,17 +1,39 @@
 'use strict';
 
+document.addEventListener('DOMContentLoaded', function () {
+
+  if (window.location.pathname === '/') {
+    var videoList = new VideoList(document.querySelector('#index'));
+    videoList.load();
+  } else {
+    var http = new XMLHttpRequest();
+    var videoPlayer = new VideoPlayer();
+    var data = void 0;
+
+    http.onreadystatechange = function check() {
+      if (http.readyState === 4 && http.status === 200) {
+        data = JSON.parse(http.response);
+        videoPlayer.gettingData(data);
+      }
+    };
+    http.open('GET', 'videos.json', true);
+    http.send();
+  }
+});
+'use strict';
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var VideoLoader = function () {
-  function VideoLoader(container) {
-    _classCallCheck(this, VideoLoader);
+var VideoList = function () {
+  function VideoList(container) {
+    _classCallCheck(this, VideoList);
 
     this.container = container;
   }
 
-  _createClass(VideoLoader, [{
+  _createClass(VideoList, [{
     key: 'load',
     value: function load() {
       var http = new XMLHttpRequest();
@@ -155,145 +177,149 @@ var VideoLoader = function () {
     }
   }]);
 
-  return VideoLoader;
+  return VideoList;
 }();
-
-console.log("poop");
-document.addEventListener('DOMContentLoaded', function () {
-  if (window.location.pathname === '/') {
-    var videoLoader = new VideoLoader(document.querySelector('#index'));
-    videoLoader.load();
-  }
-});
 'use strict';
 
-var video = document.querySelector('.video');
-var title = document.querySelector('h1');
-var fullscreenBtn = document.querySelector('#fullscreen');
-var muteBtn = document.querySelector('#mute');
-var backwardsBtn = document.querySelector('#back');
-var playPauseBtn = document.querySelector('#play-pause');
-var forwardsBtn = document.querySelector('#forward');
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-function removeBorder() {
-  var navButtons = document.querySelectorAll('.nav_button');
-  navButtons.forEach(function (e) {
-    e.classList.remove('button_border');
-  });
-}
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function playPause() {
-  var icon = document.querySelector('#play-pause');
-  var overlayIcon = document.querySelector('.overlay');
-  if (video.paused) {
-    video.play();
-    icon.src = 'img/pause.svg';
-    overlayIcon.setAttribute('style', 'visibility: hidden;');
-  } else {
-    video.pause();
-    icon.src = 'img/play.svg';
-    overlayIcon.setAttribute('style', 'visibility: visible;');
+var VideoPlayer = function () {
+  function VideoPlayer() {
+    _classCallCheck(this, VideoPlayer);
+
+    this.video = document.querySelector('.video');
+    this.title = document.querySelector('h1');
+    this.fullscreenBtn = document.querySelector('#fullscreen');
+    this.muteBtn = document.querySelector('#mute');
+    this.backwardsBtn = document.querySelector('#back');
+    this.playPauseBtn = document.querySelector('#play-pause');
+    this.forwardsBtn = document.querySelector('#forward');
+    this.overlay = document.querySelector('#overlay');
+
+    var poop = this;
+
+    this.fullscreenBtn.addEventListener('click', this.fullscreen.bind(this));
+    this.muteBtn.addEventListener('click', this.muteUnmute.bind(this));
+    this.forwardsBtn.addEventListener('click', this.forwards.bind(this));
+    this.backwardsBtn.addEventListener('click', this.backwards.bind(this));
+    this.playPauseBtn.addEventListener('click', this.playPause.bind(this));
+    this.overlay.addEventListener('click', this.playPause.bind(this));
   }
-  removeBorder();
-  icon.classList.add('button_border');
-}
 
-function backwards() {
-  video.currentTime -= 3;
-  removeBorder();
-  this.classList.add('button_border');
-}
-
-function forwards() {
-  video.currentTime += 3;
-  removeBorder();
-  this.classList.add('button_border');
-}
-
-function muteUnmute() {
-  var icon = document.querySelector('#mute');
-  if (video.muted) {
-    video.muted = false;
-    icon.src = 'img/mute.svg';
-  } else {
-    video.muted = true;
-    icon.src = 'img/unmute.svg';
-  }
-  removeBorder();
-  this.classList.add('button_border');
-}
-
-function fullscreen() {
-  if (video.requestFullscreen) {
-    video.requestFullscreen();
-  } else if (video.mozRequestFullScreen) {
-    video.mozRequestFullScreen();
-  } else if (video.webkitRequestFullscreen) {
-    video.webkitRequestFullscreen();
-  } else if (video.msRequestFullscreen) {
-    video.msRequestFullscreen();
-  }
-}
-
-fullscreenBtn.addEventListener('click', fullscreen);
-muteBtn.addEventListener('click', muteUnmute);
-forwardsBtn.addEventListener('click', forwards);
-backwardsBtn.addEventListener('click', backwards);
-playPauseBtn.addEventListener('click', playPause);
-
-function idNotFoundError() {
-  var content = document.querySelector('.grid');
-  var main = document.querySelector('main');
-  var errorMsg = document.createTextNode('Myndband fannst ekki...');
-  var errorContainer = document.createElement('h1');
-  content.hidden = true;
-  errorContainer.appendChild(errorMsg);
-  main.appendChild(errorContainer);
-}
-
-// on Load
-
-function getQueryVariable(variable) {
-  var query = window.location.search.substring(1);
-  var vars = query.split('&');
-  for (var i = 0; i < vars.length; i += 1) {
-    var pair = vars[i].split('=');
-    if (pair[0] === variable) {
-      return pair[1];
+  _createClass(VideoPlayer, [{
+    key: 'removeBorder',
+    value: function removeBorder() {
+      var navButtons = document.querySelectorAll('.nav_button');
+      navButtons.forEach(function (e) {
+        e.classList.remove('button_border');
+      });
     }
-  }
-  return false;
-}
-
-function searchForMatchingId(data, id) {
-  for (var i = 0; i < data.videos.length; i += 1) {
-    if (data.videos[i].id === id) return data.videos[i];
-  }
-  if (data.videos.id !== id) {
-    idNotFoundError();
-  }
-  return null;
-}
-
-function gettingData(e) {
-  var id = parseInt(getQueryVariable('id'), 10);
-  var vid = searchForMatchingId(e, id);
-  video.src = vid.video;
-  title.innerHTML = vid.title;
-}
-
-window.onload = function setUp() {
-  var http = new XMLHttpRequest();
-  var data = void 0;
-
-  http.onreadystatechange = function check() {
-    if (http.readyState === 4 && http.status === 200) {
-      data = JSON.parse(http.response);
-      gettingData(data);
+  }, {
+    key: 'playPause',
+    value: function playPause() {
+      var icon = document.querySelector('#play-pause');
+      var overlayIcon = document.querySelector('.overlay');
+      if (this.video.paused) {
+        this.video.play();
+        icon.src = 'img/pause.svg';
+        overlayIcon.setAttribute('style', 'visibility: hidden;');
+      } else {
+        this.video.pause();
+        icon.src = 'img/play.svg';
+        overlayIcon.setAttribute('style', 'visibility: visible;');
+      }
+      this.removeBorder();
+      icon.classList.add('button_border');
     }
-  };
-  http.open('GET', 'videos.json', true);
-  http.send();
-};
+  }, {
+    key: 'backwards',
+    value: function backwards() {
+      this.video.currentTime -= 3;
+      this.removeBorder();
+      this.backwardsBtn.classList.add('button_border');
+    }
+  }, {
+    key: 'forwards',
+    value: function forwards() {
+      this.video.currentTime += 3;
+      this.removeBorder();
+      this.forwardsBtn.classList.add('button_border');
+    }
+  }, {
+    key: 'muteUnmute',
+    value: function muteUnmute() {
+      var icon = document.querySelector('#mute');
+      if (this.video.muted) {
+        this.video.muted = false;
+        icon.src = 'img/mute.svg';
+      } else {
+        this.video.muted = true;
+        icon.src = 'img/unmute.svg';
+      }
+      removeBorder();
+      this.muteBtn.classList.add('button_border');
+    }
+  }, {
+    key: 'fullscreen',
+    value: function fullscreen() {
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.mozRequestFullScreen) {
+        video.mozRequestFullScreen();
+      } else if (video.webkitRequestFullscreen) {
+        video.webkitRequestFullscreen();
+      } else if (video.msRequestFullscreen) {
+        video.msRequestFullscreen();
+      }
+    }
+  }, {
+    key: 'idNotFoundError',
+    value: function idNotFoundError() {
+      var content = document.querySelector('.grid');
+      var main = document.querySelector('main');
+      var errorMsg = document.createTextNode('Myndband fannst ekki...');
+      var errorContainer = document.createElement('h1');
+      content.hidden = true;
+      errorContainer.appendChild(errorMsg);
+      main.appendChild(errorContainer);
+    }
+  }, {
+    key: 'getQueryVariable',
+    value: function getQueryVariable(variable) {
+      var query = window.location.search.substring(1);
+      var vars = query.split('&');
+      for (var i = 0; i < vars.length; i += 1) {
+        var pair = vars[i].split('=');
+        if (pair[0] === variable) {
+          return pair[1];
+        }
+      }
+      return false;
+    }
+  }, {
+    key: 'searchForMatchingId',
+    value: function searchForMatchingId(data, id) {
+      for (var i = 0; i < data.videos.length; i += 1) {
+        if (data.videos[i].id === id) return data.videos[i];
+      }
+      if (data.videos.id !== id) {
+        this.idNotFoundError();
+      }
+      return null;
+    }
+  }, {
+    key: 'gettingData',
+    value: function gettingData(e) {
+      var id = parseInt(this.getQueryVariable('id'), 10);
+      var vid = this.searchForMatchingId(e, id);
+      this.video.src = vid.video;
+      this.title.innerHTML = vid.title;
+    }
+  }]);
+
+  return VideoPlayer;
+}();
 
 //# sourceMappingURL=script-compiled.js.map

@@ -9,8 +9,6 @@ class VideoPlayer {
     this.forwardsBtn = document.querySelector('#forward');
     this.overlay = document.querySelector('#overlay');
 
-    let poop = this;
-
     this.fullscreenBtn.addEventListener('click', this.fullscreen.bind(this));
     this.muteBtn.addEventListener('click', this.muteUnmute.bind(this));
     this.forwardsBtn.addEventListener('click', this.forwards.bind(this));

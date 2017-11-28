@@ -264,11 +264,11 @@ var VideoPlayer = function () {
     value: function fullscreen() {
       if (this.video.requestFullscreen) {
         this.video.requestFullscreen();
-      } else if (video.mozRequestFullScreen) {
+      } else if (this.video.mozRequestFullScreen) {
         this.video.mozRequestFullScreen();
-      } else if (video.webkitRequestFullscreen) {
+      } else if (this.video.webkitRequestFullscreen) {
         this.video.webkitRequestFullscreen();
-      } else if (video.msRequestFullscreen) {
+      } else if (this.video.msRequestFullscreen) {
         this.video.msRequestFullscreen();
       }
     }

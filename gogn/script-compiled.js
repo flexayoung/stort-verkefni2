@@ -19,13 +19,11 @@ var VideoLoader = function () {
       http.open('GET', './videos.json', true);
 
       http.onload = function checkState() {
-
         if (http.status >= 200 && http.status < 400) {
           this.storeData(http.response);
           this.constructData();
         }
       }.bind(this);
-
       http.send();
     }
   }, {
@@ -161,12 +159,10 @@ var VideoLoader = function () {
 }();
 
 document.addEventListener('DOMContentLoaded', function () {
-
-  //  if (window.location.pathname === '/') {
-  console.log("baba");
-  var videoLoader = new VideoLoader(document.querySelector('#index'));
-  videoLoader.load();
-  //}
+  if (window.location.pathname === '/') {
+    var videoLoader = new VideoLoader(document.querySelector('#index'));
+    videoLoader.load();
+  }
 });
 
 //# sourceMappingURL=script-compiled.js.map

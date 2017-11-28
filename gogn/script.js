@@ -9,14 +9,11 @@ class VideoLoader {
     http.open('GET', './videos.json', true);
 
     http.onload = function checkState() {
-
       if (http.status >= 200 && http.status < 400) {
         this.storeData(http.response);
         this.constructData();
       }
-
     }.bind(this);
-
     http.send();
   }
 
@@ -145,13 +142,9 @@ class VideoLoader {
   }
 }
 
-
-
 document.addEventListener('DOMContentLoaded', () => {
-
-//  if (window.location.pathname === '/') {
-    console.log("baba");
+  if (window.location.pathname === '/') {
     const videoLoader = new VideoLoader(document.querySelector('#index'));
     videoLoader.load();
-  //}
+  }
 });

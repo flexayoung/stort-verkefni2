@@ -141,7 +141,7 @@ class VideoLoader {
     return `Fyrir ${hours} klukkutímum síðan`;
   }
 }
-
+console.log("poop")
 document.addEventListener('DOMContentLoaded', () => {
   if (window.location.pathname === '/') {
     const videoLoader = new VideoLoader(document.querySelector('#index'));

@@ -1,5 +1,5 @@
 class VideoPlayer {
-  constructor(){
+  constructor() {
     this.video = document.querySelector('.video');
     this.title = document.querySelector('h1');
     this.fullscreenBtn = document.querySelector('#fullscreen');
@@ -7,7 +7,8 @@ class VideoPlayer {
     this.backwardsBtn = document.querySelector('#back');
     this.playPauseBtn = document.querySelector('#play-pause');
     this.forwardsBtn = document.querySelector('#forward');
-    this.overlay = document.querySelector('#overlay');
+    this.overlay = document.querySelector('.overlay_background');
+
 
     let poop = this;
 
@@ -63,7 +64,7 @@ class VideoPlayer {
       this.video.muted = true;
       icon.src = 'img/unmute.svg';
     }
-    removeBorder();
+    this.removeBorder();
     this.muteBtn.classList.add('button_border');
   }
 

@@ -9,7 +9,6 @@ class VideoLoader {
     http.open('GET', './videos.json', true);
 
     http.onload = function checkState() {
-      console.log("HERE");
 
       if (http.status >= 200 && http.status < 400) {
         this.storeData(http.response);
@@ -54,7 +53,7 @@ class VideoLoader {
 
         const card = document.createElement('a');
         card.className = 'card';
-        card.href = `/player.html?id=${video.id}`;
+        card.href = `player.html?id=${video.id}`;
 
         const imageContainer = document.createElement('div');
         imageContainer.className = 'card__image';

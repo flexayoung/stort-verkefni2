@@ -1,12 +1,27 @@
 .video_container {
   display: flex;
-  width: 100%;
-  margin-top: 2em;
-  margin-bottom: 1em;
+  width: fit-content;
   flex-direction: column;
+  position: relative;
+  overflow:hidden;
+  margin: 0 auto;
+}
+
+.overlay_background {
+  position:absolute;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  display:flex;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  justify-content: center;
+  cursor: pointer;
 }
 
 .video_nav {
+  margin-top: 1em;
   display: flex;
   width: 100%;
   height: max-content;
@@ -16,6 +31,7 @@
 
 .video_heading {
   text-align: center;
+  margin-bottom: 1em;
 }
 
 .nav_button {
@@ -42,8 +58,9 @@
   transform: translate(-50%, -50%);
   z-index: 1;
   visibility: visible;
-  background: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.2);
 }
+
 
 .til_baka {
   margin-top: 1em;

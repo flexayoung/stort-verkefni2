@@ -158,11 +158,142 @@ var VideoLoader = function () {
   return VideoLoader;
 }();
 
+console.log("poop");
 document.addEventListener('DOMContentLoaded', function () {
   if (window.location.pathname === '/') {
     var videoLoader = new VideoLoader(document.querySelector('#index'));
     videoLoader.load();
   }
 });
+'use strict';
+
+var video = document.querySelector('.video');
+var title = document.querySelector('h1');
+var fullscreenBtn = document.querySelector('#fullscreen');
+var muteBtn = document.querySelector('#mute');
+var backwardsBtn = document.querySelector('#back');
+var playPauseBtn = document.querySelector('#play-pause');
+var forwardsBtn = document.querySelector('#forward');
+
+function removeBorder() {
+  var navButtons = document.querySelectorAll('.nav_button');
+  navButtons.forEach(function (e) {
+    e.classList.remove('button_border');
+  });
+}
+
+function playPause() {
+  var icon = document.querySelector('#play-pause');
+  var overlayIcon = document.querySelector('.overlay');
+  if (video.paused) {
+    video.play();
+    icon.src = 'img/pause.svg';
+    overlayIcon.setAttribute('style', 'visibility: hidden;');
+  } else {
+    video.pause();
+    icon.src = 'img/play.svg';
+    overlayIcon.setAttribute('style', 'visibility: visible;');
+  }
+  removeBorder();
+  icon.classList.add('button_border');
+}
+
+function backwards() {
+  video.currentTime -= 3;
+  removeBorder();
+  this.classList.add('button_border');
+}
+
+function forwards() {
+  video.currentTime += 3;
+  removeBorder();
+  this.classList.add('button_border');
+}
+
+function muteUnmute() {
+  var icon = document.querySelector('#mute');
+  if (video.muted) {
+    video.muted = false;
+    icon.src = 'img/mute.svg';
+  } else {
+    video.muted = true;
+    icon.src = 'img/unmute.svg';
+  }
+  removeBorder();
+  this.classList.add('button_border');
+}
+
+function fullscreen() {
+  if (video.requestFullscreen) {
+    video.requestFullscreen();
+  } else if (video.mozRequestFullScreen) {
+    video.mozRequestFullScreen();
+  } else if (video.webkitRequestFullscreen) {
+    video.webkitRequestFullscreen();
+  } else if (video.msRequestFullscreen) {
+    video.msRequestFullscreen();
+  }
+}
+
+fullscreenBtn.addEventListener('click', fullscreen);
+muteBtn.addEventListener('click', muteUnmute);
+forwardsBtn.addEventListener('click', forwards);
+backwardsBtn.addEventListener('click', backwards);
+playPauseBtn.addEventListener('click', playPause);
+
+function idNotFoundError() {
+  var content = document.querySelector('.grid');
+  var main = document.querySelector('main');
+  var errorMsg = document.createTextNode('Myndband fannst ekki...');
+  var errorContainer = document.createElement('h1');
+  content.hidden = true;
+  errorContainer.appendChild(errorMsg);
+  main.appendChild(errorContainer);
+}
+
+// on Load
+
+function getQueryVariable(variable) {
+  var query = window.location.search.substring(1);
+  var vars = query.split('&');
+  for (var i = 0; i < vars.length; i += 1) {
+    var pair = vars[i].split('=');
+    if (pair[0] === variable) {
+      return pair[1];
+    }
+  }
+  return false;
+}
+
+function searchForMatchingId(data, id) {
+  for (var i = 0; i < data.videos.length; i += 1) {
+    if (data.videos[i].id === id) return data.videos[i];
+  }
+  if (data.videos.id !== id) {
+    idNotFoundError();
+  }
+  return null;
+}
+
+function gettingData(e) {
+  var id = parseInt(getQueryVariable('id'), 10);
+  var vid = searchForMatchingId(e, id);
+  video.src = vid.video;
+  title.innerHTML = vid.title;
+}
+
+window.onload = function setUp() {
+  var http = new XMLHttpRequest();
+  var data = void 0;
+
+  http.onreadystatechange = function check() {
+    if (http.readyState === 4 && http.status === 200) {
+      data = JSON.parse(http.response);
+      gettingData(data);
+    }
+  };
+  http.open('GET', 'videos.json', true);
+  http.send();
+};
 
 //# sourceMappingURL=script-compiled.js.map

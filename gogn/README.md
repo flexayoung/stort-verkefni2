@@ -27,4 +27,6 @@ This will initiate browser sync and run the program in the browser at **localhos
 
 /scss folder contains scss files used
 
-/videos .png files for video thumbnails.
+/videos folder contains .png files for video thumbnails.
+
+/js folder contains all .js script files

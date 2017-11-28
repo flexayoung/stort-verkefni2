@@ -1,6 +1,9 @@
 Stórt-Verkefni 2 í **Vefforritun (TÖL107G)** hjá Háskóla Íslands
 
 ***
+## Live Demo
+
+Try the demo [here](https://notendur.hi.is/~amy1/vefforritun/stort-verkefni2/)
 
 ## Authors
 

@@ -107,7 +107,7 @@ function searchForMatchingId(data, id) {
 }
 
 function gettingData(e) {
-  const id = getQueryVariable("id");
+  const id = getQueryVariable('id');
   const vid = searchForMatchingId(e, id);
   video.src = vid.video;
   title.innerHTML = vid.title;

@@ -1,7 +1,6 @@
 class VideoLoader {
   constructor(container) {
     this.container = container;
-    this.load();
   }
 
   load() {
@@ -146,5 +145,6 @@ class VideoLoader {
 document.addEventListener('DOMContentLoaded', () => {
   if (window.location.pathname === '/') {
     const videoLoader = new VideoLoader(document.querySelector('#index'));
+    videoLoader.load();
   }
 });

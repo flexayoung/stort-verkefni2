@@ -104,6 +104,7 @@ function searchForMatchingId(data, id) {
   if (data.videos.id !== id) {
     idNotFoundError();
   }
+  return null;
 }
 
 function gettingData(e) {

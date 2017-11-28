@@ -198,8 +198,6 @@ var VideoPlayer = function () {
     this.forwardsBtn = document.querySelector('#forward');
     this.overlay = document.querySelector('#overlay');
 
-    var poop = this;
-
     this.fullscreenBtn.addEventListener('click', this.fullscreen.bind(this));
     this.muteBtn.addEventListener('click', this.muteUnmute.bind(this));
     this.forwardsBtn.addEventListener('click', this.forwards.bind(this));
@@ -264,14 +262,14 @@ var VideoPlayer = function () {
   }, {
     key: 'fullscreen',
     value: function fullscreen() {
-      if (video.requestFullscreen) {
-        video.requestFullscreen();
-      } else if (video.mozRequestFullScreen) {
-        video.mozRequestFullScreen();
-      } else if (video.webkitRequestFullscreen) {
-        video.webkitRequestFullscreen();
-      } else if (video.msRequestFullscreen) {
-        video.msRequestFullscreen();
+      if (this.video.requestFullscreen) {
+        this.video.requestFullscreen();
+      } else if (this.video.mozRequestFullScreen) {
+        this.video.mozRequestFullScreen();
+      } else if (this.video.webkitRequestFullscreen) {
+        this.video.webkitRequestFullscreen();
+      } else if (this.video.msRequestFullscreen) {
+        this.video.msRequestFullscreen();
       }
     }
   }, {
